@@ -5,6 +5,8 @@ import (
 	"log"
 	"os"
 	"os/signal"
+
+	"github.com/LalatinaHub/wstunnel/pkg/tunnel"
 )
 
 var (
@@ -20,9 +22,9 @@ func main() {
 	log.Println("Listening addr: " + ListeningAddr)
 	log.Println("Listening port: ", ListeningPort)
 
-	server := &Server{
-		host: ListeningAddr,
-		port: ListeningPort,
+	server := tunnel.Server{
+		Host: ListeningAddr,
+		Port: ListeningPort,
 	}
 	go server.Run()
 

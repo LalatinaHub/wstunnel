@@ -1,9 +1,8 @@
-package main
+package tunnel
 
 import (
 	"log"
 	"net"
-	"strconv"
 	"strings"
 )
 
@@ -13,7 +12,6 @@ const (
 
 // ConnectionHandler represents a connection handler
 type ConnectionHandler struct {
-	method       string
 	client       net.Conn
 	clientClosed bool
 	target       net.Conn
@@ -97,12 +95,6 @@ func (c *ConnectionHandler) connectTarget(host string) {
 	if len(hostPort) == 2 {
 		host = hostPort[0]
 		port = hostPort[1]
-	} else {
-		if c.method == "CONNECT" {
-			port = "443"
-		} else {
-			port = strconv.Itoa(ListeningPort)
-		}
 	}
 
 	addr, err := net.ResolveTCPAddr("tcp", net.JoinHostPort(host, port))

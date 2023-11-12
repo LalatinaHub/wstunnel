@@ -1,4 +1,4 @@
-package main
+package tunnel
 
 import (
 	"log"
@@ -17,15 +17,15 @@ const (
 // Server represents the server
 type Server struct {
 	running     bool
-	host        string
-	port        int
+	Host        string
+	Port        int
 	connections []*ConnectionHandler
 	connMutex   sync.Mutex
 }
 
 // Run starts the server
 func (s *Server) Run() {
-	addr := net.JoinHostPort(s.host, strconv.Itoa(s.port))
+	addr := net.JoinHostPort(s.Host, strconv.Itoa(s.Port))
 	listener, err := net.Listen("tcp", addr)
 	if err != nil {
 		log.Fatal("Error listening:", err.Error())
